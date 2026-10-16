@@ -1,3 +1,5 @@
+<img src="assets/icon.png" width="96" alt="Icona di Music Overlay">
+
 # Music Overlay
 
 Controlla Spotify mentre giochi: play, pausa, canzone avanti/indietro e volume, da

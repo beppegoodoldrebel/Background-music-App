@@ -4,9 +4,9 @@ import tkinter as tk
 
 import keyboard
 import pystray
-from PIL import Image, ImageDraw, ImageTk
+from PIL import ImageTk
 
-from . import appinfo, config, i18n, theme
+from . import appinfo, config, i18n, icon, theme
 from .i18n import t
 from .controller import ControllerManager
 from .hotkeys import HotkeyManager
@@ -20,14 +20,13 @@ log = logging.getLogger(__name__)
 POLL_MS = 2000  # stato di Spotify
 
 
+TRAY_ICON_SIZE = 64      # Windows la riduce alla misura dell'area di notifica
+WINDOW_ICON_SIZES = (16, 32, 48, 256)
+
+
 def _tray_image(active):
-    img = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    d.ellipse((2, 2, 62, 62), fill=(30, 215, 96) if active else (110, 110, 110))
-    d.ellipse((16, 38, 32, 52), fill="white")
-    d.rectangle((28, 14, 32, 45), fill="white")
-    d.polygon([(32, 14), (48, 20), (48, 28), (32, 22)], fill="white")
-    return img
+    """Verde con i controlli attivi, grigia in attesa."""
+    return icon.render(TRAY_ICON_SIZE, active)
 
 
 class App:
@@ -50,8 +49,10 @@ class App:
 
         self.root = tk.Tk()
         self.root.withdraw()
-        self._window_icon = ImageTk.PhotoImage(_tray_image(True), master=self.root)
-        self.root.iconphoto(True, self._window_icon)  # vale per tutte le finestre
+        # Più misure: Windows sceglie quella giusta per barra del titolo e Alt+Tab.
+        self._window_icons = [ImageTk.PhotoImage(icon.render(size), master=self.root)
+                              for size in sorted(WINDOW_ICON_SIZES, reverse=True)]
+        self.root.iconphoto(True, *self._window_icons)  # vale per tutte le finestre
         # Il tema di Windows viene letto solo all'avvio.
         self.pal = theme.apply(self.root, theme.system_is_dark())
 
