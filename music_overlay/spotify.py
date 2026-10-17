@@ -26,6 +26,7 @@ COMMANDS = {
     "pause": lambda s: s.try_pause_async(),
     "next": lambda s: s.try_skip_next_async(),
     "previous": lambda s: s.try_skip_previous_async(),
+    "shuffle": lambda s: s.try_change_shuffle_active_async(not s.get_playback_info().is_shuffle_active),
 }
 
 

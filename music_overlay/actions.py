@@ -2,7 +2,7 @@
 invia una di queste chiavi a App.trigger()."""
 from .i18n import t
 
-ACTIONS = ("volume_up", "volume_down", "next", "previous", "pause", "play")
+ACTIONS = ("volume_up", "volume_down", "next", "previous", "pause", "play", "shuffle")
 
 
 def action_label(action):

@@ -68,6 +68,9 @@ STRINGS = {
                         "es": "Canción anterior", "de": "Vorheriger Titel"},
     "action.pause": {"en": "Pause", "it": "Pausa", "fr": "Pause", "es": "Pausa", "de": "Pause"},
     "action.play": {"en": "Play", "it": "Riproduci", "fr": "Lecture", "es": "Reproducir", "de": "Wiedergabe"},
+    "action.shuffle": {"en": "Toggle shuffle", "it": "Attiva/disattiva casuale",
+                       "fr": "Activer/désactiver l'aléatoire", "es": "Activar/desactivar aleatorio",
+                       "de": "Zufallswiedergabe an/aus"},
 
     # --- Overlay e messaggi di Spotify --------------------------------------
     "msg.spotify_closed": {"en": "Spotify isn't open", "it": "Spotify non è aperto",

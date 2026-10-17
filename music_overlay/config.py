@@ -27,6 +27,7 @@ DEFAULTS = {
         "previous": "ctrl+alt+left",
         "pause": "ctrl+alt+space",
         "play": "ctrl+alt+enter",
+        "shuffle": "ctrl+alt+s",
     },
     "controller_enabled": True,
     "controller": {
@@ -36,6 +37,7 @@ DEFAULTS = {
         "previous": "view+left",
         "pause": "view+x",
         "play": "view+a",
+        "shuffle": "view+y",
     },
     # "hotkeys" e "controller" qui sopra sono il preset generale. Qui i preset
     # per exe: {"gioco.exe": {"hotkeys": {...}, "controller": {...}}}
