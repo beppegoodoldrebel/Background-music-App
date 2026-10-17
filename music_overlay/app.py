@@ -6,7 +6,7 @@ import keyboard
 import pystray
 from PIL import ImageTk
 
-from . import appinfo, config, i18n, icon, theme
+from . import appinfo, config, i18n, icon, splash, theme
 from .i18n import t
 from .controller import ControllerManager
 from .hotkeys import HotkeyManager
@@ -85,9 +85,14 @@ class App:
         self.controller.start()
         self.root.after(50, self._pump)
         self.root.after(POLL_MS, self._poll)
+        # Schermata d'avvio, tranne sopra un gioco in fullscreen esclusivo.
+        show_splash = not self._exclusive_fullscreen()
+        if show_splash:
+            splash.show(self.root, self.pal)
         if self._first_run:
             config.save(self.cfg)
-            self.open_settings()
+            # Dopo la schermata d'avvio, non sotto.
+            self.root.after(splash.DURATION_MS if show_splash else 0, self.open_settings)
         self.root.mainloop()
 
     def call_in_ui(self, fn, *args):
