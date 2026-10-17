@@ -3,5 +3,8 @@
 __pycache__/
 *.pyc
 
+# Exe e installer creati da packaging/build.py
+build/
+
 # Editor
 .vscode/

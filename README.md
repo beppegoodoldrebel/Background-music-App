@@ -9,22 +9,22 @@ a small overlay that shows the cover art and the track title.
 The app sits in the notification area and turns on by itself when you open one of
 the programs you picked.
 
-## Requirements
-
-- Windows 10 or 11
-- Python 3.12
-- Spotify for desktop (Premium not required: no account or login needed)
-
 ## Installation
 
-```
-py -3.12 -m venv .venv
-.venv\Scripts\pip install -r requirements.txt
-```
+Download `MusicOverlay-<version>-Setup.exe` from the
+[Releases](https://github.com/beppegoodoldrebel/Background-music-App/releases) page and run it.
+No administrator rights and no Python needed. Requires Windows 10 or 11 (64-bit) and
+Spotify for desktop (Premium not required: no account or login needed).
+
+The installer isn't digitally signed, so Windows SmartScreen may warn you:
+click **More info → Run anyway**.
+
+During setup you can add a desktop icon and start Music Overlay with Windows.
+Uninstall it from **Settings → Apps**; your settings are kept.
 
 ## Getting started
 
-Double-click `Avvia.bat`. A splash screen with the app's icon and name shows for
+Open **Music Overlay** from the Start menu. A splash screen with the app's icon and name shows for
 two seconds, then the app lives in the notification area:
 right-click the icon → **Settings**, **Show overlay**, **Quit**.
 The icon is green while the controls are active and grey while the app is waiting.
@@ -98,6 +98,8 @@ the **General → Language** tab.
 | `music_overlay/theme.py` | Light/dark theme and window helpers |
 | `music_overlay/icon.py` | App icon, drawn in code (`assets/icon.ico` is generated from it) |
 | `music_overlay/splash.py` | Splash screen shown at startup |
+| `packaging/build.py` | Builds the exe (PyInstaller) and the installer (Inno Setup) |
+| `packaging/MusicOverlay.iss` | Installer script |
 | `music_overlay/i18n.py` | Texts in the 5 languages |
 | `music_overlay/config.py` | Saved settings |
 
@@ -105,4 +107,26 @@ Every input source calls `App.trigger(action)` with one of the actions in
 `actions.ACTIONS`: to add a new kind of control, a module that does the same is all
 it takes.
 
-To run it from a terminal: `.venv\Scripts\python -m music_overlay`.
+## Development
+
+Requires Python 3.12.
+
+```
+py -3.12 -m venv .venv
+.venv\Scripts\pip install -r requirements.txt
+.venv\Scripts\python -m music_overlay
+```
+
+`Avvia.bat` starts it without a terminal window.
+
+### Building the installer
+
+Needs PyInstaller (`.venv\Scripts\pip install pyinstaller`) and Inno Setup 6
+(`winget install JRSoftware.InnoSetup`). The version comes from
+`music_overlay/__init__.py`.
+
+```
+.venv\Scripts\python packaging\build.py
+```
+
+The result is `build\installer\MusicOverlay-<version>-Setup.exe`.
